@@ -16,12 +16,12 @@ public:
 	
 	struct Node {
 	public:
-		long timestamp;	//					- Start time of time window (60s window), in Unix time
+		long timestamp;	//			- Start time of time window (60s window), in Unix time
 		float pOpen;	//price Open		- Open price at start time window
 		float pHigh;	//price High		- High price within time window
-		float pLow;		//price Low			- Low price within time window
+		float pLow;	//price Low		- Low price within time window
 		float pClose;	//price Close		- Close price at end of time window
-		string vBTC;		//volume BTC		- Volume of BTC transacted in this window
+		string vBTC;	//volume BTC		- Volume of BTC transacted in this window
 		string vCurr;	//volume Currency	- Volume of corresponding currency transacted in this window
 		string wPrice;	//weighted price	- VWAP - Volume Weighted Average Price
 
