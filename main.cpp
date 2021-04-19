@@ -3,6 +3,7 @@
 #include <string>
 #include <ctime>
 #include "LinkedList.h"
+//#include "Quicksort.h"
 using namespace std;
 
 
@@ -24,6 +25,9 @@ int main() {
 	long counter = 0;
 	//we are reading each line of the csv file. this will loop 4,857,378 times for each data entry in the csv file.
 	while(getline(stamps, line, '\n')) {
+
+		if (counter > 10)
+			break;
 		//=======================================timestamps=======================================
 
 		timestamp = stol(line.substr(0, line.find(',')));	//getting timestamp
@@ -76,14 +80,16 @@ int main() {
 		if (counter % 10000 == 0)
 			cout << counter << "nodes created..." << endl;
 	}
-
+	/*
 	cout << "Head: " << BTCLinkedList.head->timestamp << endl;
 	cout << "Head Next: " << BTCLinkedList.head->next->timestamp << endl;
 	cout << "Head Next Prev (Just Head): " << BTCLinkedList.head->next->prev->timestamp << endl;
 	cout << "Tail: " << BTCLinkedList.tail->timestamp << endl;
 	cout << "Tail Prev: " << BTCLinkedList.tail->prev->timestamp << endl;
 	cout << "Tail Prev Next (Just Tail): " << BTCLinkedList.tail->prev->next->timestamp << endl;
-
-
+	*/
+	BTCLinkedList.printList();
+	BTCLinkedList.QuickSort();
+	BTCLinkedList.printList();
 	return 0;
 }
