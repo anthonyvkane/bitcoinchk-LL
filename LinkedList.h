@@ -1,11 +1,10 @@
 #pragma once
+#include <string>
 using namespace std;
 
-
 class LinkedList {
-
 private:
-
+	int size;              //The size of the linked list
 public:
 	
 	struct Node {
@@ -28,15 +27,17 @@ public:
 			prev = nullptr;
 			next = nullptr;
 		}
+		Node* Clone()
+		{
+			return new Node(timestamp, pOpen, pHigh, pLow, pClose, vBTC, vCurr, wPrice);
+		}
 	};
-
-
 
 	Node* head;
 	Node* tail;
 
 	LinkedList() {	//default constructor
-		head = nullptr; tail = nullptr;
+		head = nullptr; tail = nullptr; size = 0;
 	};
 
 	/*
@@ -156,8 +157,113 @@ public:
 		}
 		cout << "Printing done." << endl;
 	}
+	int getSize() {
+		return size;
+	}
 
 
+	//==========================MERGESORT======================
+	Node* Merge(Node* leftList, Node* rightList, int leftLength, int rightLength)
+	{
+		Node* root = nullptr;
+		Node* iter = nullptr;
+		Node* leftIter = leftList;
+		Node* rightIter = rightList;
+		Node* rightEnd = rightIter;
+		Node* leftEnd = leftIter;
+
+		if (leftIter->pHigh < rightIter->pHigh)
+		{
+			root = leftIter->Clone();
+			leftIter = leftIter->next;
+		}
+		else {
+			root = rightIter->Clone();
+			rightIter = rightIter->next;
+		}
+
+		iter = root;
+
+		//Setting up the bounds for the end of the lists
+		for (int i = 0; i < leftLength; i++)
+		{
+			leftEnd = leftEnd->next;
+		}
+		for (int i = 0; i < rightLength; i++)
+		{
+			rightEnd = rightEnd->next;
+		}
+
+		while (leftIter != leftEnd && rightIter != rightEnd)
+		{
+			if (leftIter->pHigh < rightIter->pHigh)
+			{
+				iter->next = leftIter->Clone();
+				iter->next->prev = iter;
+				iter = iter->next;
+				leftIter = leftIter->next;
+			}
+			else
+			{
+				iter->next = rightIter->Clone();
+				iter->next->prev = iter;
+				iter = iter->next;
+				rightIter = rightIter->next;
+			}
+		}
+		//If left list is not empty
+		if (leftIter != rightList && leftIter != nullptr)
+		{
+			while (leftIter != rightList && leftIter != nullptr)
+			{
+				iter->next = leftIter->Clone();
+				iter->next->prev = iter;
+				leftIter = leftIter->next;
+				iter = iter->next;
+			}
+		}
+		//If right list is not empty
+		else if (rightIter != rightEnd && rightIter != nullptr)
+		{
+			while (rightIter != rightEnd && rightIter != nullptr)
+			{
+				iter->next = rightIter->Clone();
+				iter->next->prev = iter;
+				iter = iter->next;
+				rightIter = rightIter->next;
+			}
+		}
+
+		tail = iter;
+		return root;
+	}
+
+	Node* MergeSort(Node* start, Node* end, int length)
+	{
+		Node* middle = start;
+	int dist = 1;
+	Node* left = nullptr;
+	Node* right = nullptr;
+
+	if (length == 1)
+	{
+		return start;
+	}
+	else if (length == 2)
+	{
+		return Merge(start, end, 1, 1);
+	}
+
+	for (int i = 0; i < length / 2; i++)
+	{
+		middle = middle->next;
+		dist++;
+	}
+
+	left = MergeSort(start, middle, dist);
+	right = MergeSort(middle->next, end, length - dist);
+	return(Merge(left, right, dist, length - dist));
+	}
 
 	//==========================QUICKSORT======================
 	//inspiration from https://www.geeksforgeeks.org/quicksort-for-linked-list/
