@@ -7,10 +7,10 @@ LinkedList::LinkedList()
 }
 
 //Add a node to the linked list
-void LinkedList::CreateAndAddNode(long timestamp, float open, float high, float low, float close, string vBTC, string vCurr, string wPrice)
+void LinkedList::CreateAndAddNode(long timestamp, float high)
 {
 	//node creation
-	Node* node = new Node(timestamp, open, high, low, close, vBTC, vCurr, wPrice);
+	Node* node = new Node(timestamp, high);
 
 	if (head == nullptr) {	//if no head, insert a head
 		head = node;
@@ -118,6 +118,7 @@ void LinkedList::Print()
 		iter = iter->next;
 	}
 	cout << endl;
+	cout << endl;
 }
 void LinkedList::Print(int num)
 {
@@ -127,6 +128,7 @@ void LinkedList::Print(int num)
 		cout << iter->pHigh << " ";
 		iter = iter->next;
 	}
+	cout << endl;
 	cout << endl;
 }
 
@@ -234,6 +236,15 @@ LinkedList::Node* LinkedList::MergeSort(Node* start, Node* end, int length) {
 	right = MergeSort(middle->next, end, length - dist);
 	return(Merge(left, right, dist, length - dist));
 }
+//Sets the tail to the correct value
+void LinkedList::setTail(Node* root)
+{
+	while (root->next != nullptr)
+	{
+		root = root->next;
+	}
+	tail = root;
+}
 
 ////==================\\\\
 ///=====Quick Sort=====\\\
@@ -251,31 +262,31 @@ void LinkedList::swap(Node* a, Node* b)
 	//swaps nodes a with b.
 		//cout << "swapping: " << a->pClose << "and " << b->pClose << endl;
 	long tTime = a->timestamp;
-	float tpOpen = a->pOpen;
+	//float tpOpen = a->pOpen;
 	float tpHigh = a->pHigh;
-	float tpLow = a->pLow;
-	float tpClose = a->pClose;
-	string tvBTC = a->vBTC;
-	string tvCurr = a->vCurr;
-	string twPrice = a->wPrice;
+	//float tpLow = a->pLow;
+	//float tpClose = a->pClose;
+	//string tvBTC = a->vBTC;
+	//string tvCurr = a->vCurr;
+	//string twPrice = a->wPrice;
 
 	a->timestamp = b->timestamp;
-	a->pOpen = b->pOpen;
+	//a->pOpen = b->pOpen;
 	a->pHigh = b->pHigh;
-	a->pLow = b->pLow;
-	a->pClose = b->pClose;
-	a->vBTC = b->vBTC;
-	a->vCurr = b->vCurr;
-	a->wPrice = b->wPrice;
+	//a->pLow = b->pLow;
+	//a->pClose = b->pClose;
+	//a->vBTC = b->vBTC;
+	//a->vCurr = b->vCurr;
+	//a->wPrice = b->wPrice;
 
 	b->timestamp = tTime;
-	b->pOpen = tpOpen;
+	//b->pOpen = tpOpen;
 	b->pHigh = tpHigh;
-	b->pLow = tpLow;
-	b->pClose = tpClose;
-	b->vBTC = tvBTC;
-	b->vCurr = tvCurr;
-	b->wPrice = twPrice;
+	//b->pLow = tpLow;
+	//b->pClose = tpClose;
+	//b->vBTC = tvBTC;
+	//b->vCurr = tvCurr;
+	//b->wPrice = twPrice;
 
 	//cout << "a close: " << a->pClose << " | b close: " << b->pClose << endl;
 }

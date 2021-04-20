@@ -56,6 +56,7 @@ public:
 	//==========================MERGESORT======================
 	Node* Merge(Node* leftList, Node* rightList, int leftLength, int rightLength);
 	Node* MergeSort(Node* start, Node* end, int length);
+	void setTail(Node* root);
 
 	//==========================QUICKSORT======================
 	//inspiration from https://www.geeksforgeeks.org/quicksort-for-linked-list/
