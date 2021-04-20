@@ -29,6 +29,8 @@ int main() {
         BTCLinkedList = new LinkedList();
         BTCLinkedListQuick = new LinkedList();
         stamps.open("bitstamps.csv");
+        stamps.seekg(0, ios::beg);
+
     //------------------------CLI
     MainMenu();
        string start, end;
@@ -38,7 +40,7 @@ int main() {
        
        
        
-       cout << "unix1: " << start << ", unix2: " << end << endl;
+       //cout << "unix1: " << start << ", unix2: " << end << endl;
     //CLI DONE
     long counter = 0;
     //we are reading each line of the csv file. this will loop 4,857,378 times for each data entry in the csv file.
