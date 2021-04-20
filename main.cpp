@@ -20,7 +20,7 @@ int main() {
 	float open, high, low, close;
 	string vBTC, vCurr, wPrice;
 
-	LinkedList BTCLinkedList = LinkedList(); //our linked list. after the while loop this will contain all of our nodes
+	LinkedList* BTCLinkedList = new LinkedList(); //our linked list. after the while loop this will contain all of our nodes
 
 	long counter = 0;
 	//we are reading each line of the csv file. this will loop 4,857,378 times for each data entry in the csv file.
@@ -46,6 +46,7 @@ int main() {
 			high = stof(line.substr(0, line.find(',')));
 		}
 		else {
+			continue;
 			high = -1;
 		}
 		//=======================================low=======================================
@@ -75,7 +76,7 @@ int main() {
 		line = line.substr(line.find(',') + 1);
 		wPrice = line.substr(0, line.find(','));
 
-		BTCLinkedList.CreateAndAddNode(timestamp, open, high, low, close, vBTC, vCurr, wPrice);
+		BTCLinkedList->CreateAndAddNode(timestamp, high);
 		counter++;
 		if (counter % 10000 == 0)
 			cout << counter << "nodes created..." << endl;
@@ -88,8 +89,8 @@ int main() {
 	cout << "Tail Prev: " << BTCLinkedList.tail->prev->timestamp << endl;
 	cout << "Tail Prev Next (Just Tail): " << BTCLinkedList.tail->prev->next->timestamp << endl;
 	*/
-	BTCLinkedList.Print();
-	BTCLinkedList.QuickSort();
-	BTCLinkedList.Print();
+	BTCLinkedList->Print();
+	BTCLinkedList->QuickSort();
+	BTCLinkedList->Print();
 	return 0;
 }
