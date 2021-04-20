@@ -88,8 +88,8 @@ int main() {
 	cout << "Tail Prev: " << BTCLinkedList.tail->prev->timestamp << endl;
 	cout << "Tail Prev Next (Just Tail): " << BTCLinkedList.tail->prev->next->timestamp << endl;
 	*/
-	BTCLinkedList.printList();
+	BTCLinkedList.Print();
 	BTCLinkedList.QuickSort();
-	BTCLinkedList.printList();
+	BTCLinkedList.Print();
 	return 0;
 }
