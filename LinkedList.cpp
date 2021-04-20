@@ -5,6 +5,22 @@ LinkedList::LinkedList()
 {
 	head = nullptr; tail = nullptr; size = 0;
 }
+LinkedList::~LinkedList()
+{
+	Node* iter = head;
+	Node* temp = iter->next;
+	while (iter != nullptr)
+	{
+		delete iter;
+		iter = temp;
+		
+		if (iter == nullptr)
+		{
+			break;
+		}
+		temp = iter->next;
+	}
+}
 
 //Add a node to the linked list
 void LinkedList::CreateAndAddNode(long timestamp, float high)
@@ -250,6 +266,13 @@ void LinkedList::setTail(Node* root)
 ///=====Quick Sort=====\\\
 //======================\\
 
+LinkedList::Node* LinkedList::lastNode(Node* root)
+{
+	while (root && root->next)
+		root = root->next;
+	return root;
+}
+
 void LinkedList::swap(Node* a, Node* b)
 {
 	//swaps nodes a with b.
@@ -315,6 +338,7 @@ void LinkedList::_QuickSort(Node* l, Node* h)
 void LinkedList::QuickSort()
 {
 	cout << "Starting QuickSort..." << endl;
-	_QuickSort(head, tail);
+	Node* h = lastNode(head);
+	_QuickSort(head, h);
 	cout << "QuickSort done." << endl;
 }
