@@ -40,11 +40,11 @@ public:
 	Node* tail;
 
 	LinkedList();
-	int GetSize() {return size;}
+	int GetSize() { return size; }
 
 	//node creating and Linked List updating happen in the same step.
 	void CreateAndAddNode(long timestamp, float high);
-	
+
 	//given a start and end timestamp, returns the shortened linked list between the two given nodes
 	//dependendent on start and end timestamps, we will start iteration through head or tail to save time
 	//if start or end timestamp is invalid, they are set to the original head or tail respectively

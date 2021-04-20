@@ -2,16 +2,13 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <chrono>
 #include "LinkedList.h"
 //#include "Quicksort.h"
 using namespace std;
 
 
 int main() {
-
-	//nathan: mergesort
-	//pascual: cli
-	//anthony: quicksort
 
 	ifstream stamps;
 	stamps.open("bitstamps.csv");
@@ -24,16 +21,17 @@ int main() {
 
 	long counter = 0;
 	//we are reading each line of the csv file. this will loop 4,857,378 times for each data entry in the csv file.
-	while(getline(stamps, line, '\n')) {
+	auto startClock = chrono::steady_clock::now();
+	while (getline(stamps, line, '\n')) {
 
-		if (counter > 10)
-			break;
+		//if (counter > 10)
+		//	break;
 		//=======================================timestamps=======================================
 
 		timestamp = stol(line.substr(0, line.find(',')));	//getting timestamp
 
 		//=======================================open=======================================
-		line = line.substr(line.find(',')+1);
+		line = line.substr(line.find(',') + 1);
 		if (line.substr(0, line.find(',')) != "NaN") {
 			open = stof(line.substr(0, line.find(',')));
 		}
@@ -81,16 +79,20 @@ int main() {
 		if (counter % 10000 == 0)
 			cout << counter << "nodes created..." << endl;
 	}
-	/*
-	cout << "Head: " << BTCLinkedList.head->timestamp << endl;
-	cout << "Head Next: " << BTCLinkedList.head->next->timestamp << endl;
-	cout << "Head Next Prev (Just Head): " << BTCLinkedList.head->next->prev->timestamp << endl;
-	cout << "Tail: " << BTCLinkedList.tail->timestamp << endl;
-	cout << "Tail Prev: " << BTCLinkedList.tail->prev->timestamp << endl;
-	cout << "Tail Prev Next (Just Tail): " << BTCLinkedList.tail->prev->next->timestamp << endl;
-	*/
-	BTCLinkedList->Print();
+	auto endClock = chrono::steady_clock::now();
+	cout << "Time taken to create LinkedList: " << chrono::duration_cast<chrono::milliseconds>(endClock - startClock).count() << " ms" << endl;
+
+	//BTCLinkedList->Print();
+	startClock = chrono::steady_clock::now();
 	BTCLinkedList->QuickSort();
-	BTCLinkedList->Print();
+	endClock = chrono::steady_clock::now();
+	cout << "Time taken for Quicksort: " << chrono::duration_cast<chrono::milliseconds>(endClock - startClock).count() << " ms" << endl;
+	//BTCLinkedList->Print();
+	cout << "Head: " << BTCLinkedList->head->pHigh << endl;
+	cout << "Head Next: " << BTCLinkedList->head->next->pHigh << endl;
+	cout << "Head Next Prev (Just Head): " << BTCLinkedList->head->next->prev->pHigh << endl;
+	cout << "Tail: " << BTCLinkedList->tail->pHigh << endl;
+	cout << "Tail Prev: " << BTCLinkedList->tail->prev->pHigh << endl;
+	cout << "Tail Prev Next (Just Tail): " << BTCLinkedList->tail->prev->next->pHigh << endl;
 	return 0;
 }
