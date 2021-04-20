@@ -60,7 +60,6 @@ public:
 
     //==========================QUICKSORT======================
     //inspiration from https://www.geeksforgeeks.org/quicksort-for-linked-list/
-    Node* lastNode(Node* root);
     void swap(Node* a, Node* b);
     Node* partition(Node* l, Node* h);
     void _QuickSort(Node* l, Node* h);

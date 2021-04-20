@@ -15,21 +15,23 @@ int main() {
     //pascual: cli
     //anthony: quicksort
     ifstream stamps;
-    stamps.open("bitstamps.csv");
+    
     string line;
     long timestamp;
     float open, high, low, close;
     string vBTC, vCurr, wPrice;
-
-    LinkedList* BTCLinkedList = new LinkedList(); //our linked list. after the while loop this will contain all of our nodes
-    LinkedList* BTCLinkedListQuick = new LinkedList();
+    //our linked list. after the while loop this will contain all of our nodes
+    LinkedList* BTCLinkedList;
+    LinkedList* BTCLinkedListQuick;
     
     
     while(menuChoice == 0) {
+        BTCLinkedList = new LinkedList();
+        BTCLinkedListQuick = new LinkedList();
+        stamps.open("bitstamps.csv");
     //------------------------CLI
     MainMenu();
        string start, end;
-       
        //these functions will probably have to be in the actual main function
        start = enterStart();
        end = enterEnd();
@@ -101,6 +103,7 @@ int main() {
         if (counter % 10000 == 0)
             cout << counter << "nodes created..." << endl;
     }
+        stamps.close();
         auto endClock = chrono::steady_clock::now();
         cout << "Time taken to create LinkedList: " << chrono::duration_cast<chrono::milliseconds>(endClock - startClock).count() << " ms" << endl;
         
